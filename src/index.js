@@ -5,4 +5,3 @@ import App from "./app";
 import App2 from "./app2";
 
 reactdom.render(<App />, document.querySelector("#root"));
-// reactdom.render(<Navbar/>, document.querySelector('#root'))
