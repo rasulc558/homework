@@ -13,7 +13,6 @@ const CountersList = () => {
   const [counters, setCounters] = useState(initialState);
 
   const handleDelete = (id) => {
-    // console.log(id);
     setCounters(counters.filter((count) => count.id !== id));
   };
 
@@ -24,14 +23,19 @@ const CountersList = () => {
   return (
     <>
       {counters.map((count) => (
-        <Counter key={count.id} {...count} onDelete={handleDelete} />
+        <Counter
+          key={count.id}
+          {...count}
+          onDelete={handleDelete}
+          setCounters={setCounters}
+        />
       ))}
 
       <button
         className="btn btn-sm btn-primary m-2"
         onClick={handleInitialState}
       >
-        Сброс{" "}
+        Сброс
       </button>
     </>
   );

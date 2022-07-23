@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const Counter = (props) => {
-  const { value } = props;
+  const { value, setCounters, id } = props;
 
   const formatCount = () => {
     return value === 0 ? "empty" : value;
@@ -12,11 +12,30 @@ const Counter = (props) => {
     return classes;
   };
 
-  const handleIncrement = () => {
-    console.log("increment");
+  const handleIncrement = (id) => {
+    setCounters((items) => {
+      console.log(items);
+      return items.map((item) => {
+        if (item.id === id) {
+          return { ...item, value: (item.value += 1) };
+        } else {
+          return item;
+        }
+      });
+    });
   };
-  const handleDecrement = () => {
-    console.log("decrement");
+
+  const handleDecrement = (id) => {
+    setCounters((items) => {
+      console.log(items);
+      return items.map((item) => {
+        if (item.id === id) {
+          return { ...item, value: (item.value -= 1) };
+        } else {
+          return item;
+        }
+      });
+    });
   };
 
   return (
@@ -24,10 +43,18 @@ const Counter = (props) => {
       <span className="m-2">{props.name}</span>
 
       <span className={getBadgeClasses()}> {formatCount()} </span>
-      <button className="btn btn-primary btn-sm m-2" onClick={handleIncrement}>
+
+      <button
+        className="btn btn-primary btn-sm m-2"
+        onClick={() => handleIncrement(id)}
+      >
         +
       </button>
-      <button className="btn btn-primary btn-sm m-2" onClick={handleDecrement}>
+
+      <button
+        className="btn btn-primary btn-sm m-2"
+        onClick={() => handleDecrement(id)}
+      >
         -
       </button>
       <button
